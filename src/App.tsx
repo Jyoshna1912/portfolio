@@ -8,6 +8,8 @@ import {
   BriefcaseBusiness,
   MapPin,
   Linkedin,
+  Github,
+  ChevronDown,
 } from "lucide-react";
 import { projects, type Project } from "./data/projects";
 import resumePdf from "./assets/Jyoshna-Rayadurgam-Resume.pdf";
@@ -69,6 +71,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const [expandedProjects, setExpandedProjects] = useState<string[]>([]);
 
   useEffect(() => {
     const ids = ["about", "experience", "work", "contact"];
@@ -126,17 +129,19 @@ function App() {
 
   const visibleProjects = useMemo(
     () =>
-      projects.filter((project) => {
-        if (activeCategory === "Websites")
-          return (
-            project.visual === "image" ||
-            project.visual === "education" ||
-            project.visual === "product"
-          );
-        if (activeCategory === "Applications")
-          return project.visual === "pos" || project.visual === "dashboard";
-        return true;
-      }),
+      projects
+        .filter((project) => {
+          if (activeCategory === "Websites")
+            return (
+              project.visual === "image" ||
+              project.visual === "education" ||
+              project.visual === "product"
+            );
+          if (activeCategory === "Applications")
+            return project.visual === "pos" || project.visual === "dashboard";
+          return true;
+        })
+        .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))),
     [activeCategory],
   );
   const closeMenu = () => setMenuOpen(false);
@@ -151,11 +156,15 @@ function App() {
             <br />
             Rayadurgam<span>.</span>
           </h1>
-          <h2>I build thoughtful digital experiences.</h2>
+          <h2>Frontend Developer building real-world React applications.</h2>
           <p className="intro-summary">
-            I turn ideas into clear, useful interfaces — from client websites to
-            the workflows behind business applications.
+            I build responsive web interfaces and business workflows with React.js
+            and TypeScript, and contribute to desktop applications with Electron.js.
           </p>
+          <div className="hero-actions">
+            <a className="hero-primary" href="#work">Explore my work <ArrowUpRight size={15} /></a>
+            <a className="hero-secondary" href="#contact">Contact me</a>
+          </div>
         </div>
         <button
           className="mobile-nav-toggle"
@@ -189,10 +198,9 @@ function App() {
           <a
             className="resume-link"
             href={resumePdf}
-            target="_blank"
-            rel="noreferrer"
+            download="Jyoshna_Rayadurgam_Frontend_Resume.pdf"
           >
-            VIEW RESUME <ArrowUpRight size={15} />
+            DOWNLOAD RESUME <ArrowUpRight size={15} />
           </a>
           <div className="social-links">
             <a
@@ -202,12 +210,20 @@ function App() {
               <Mail size={18} />
             </a>
             <a
-              href="https://www.linkedin.com/in/jyoshna-rayadurgam"
+              href="https://www.linkedin.com/in/jyoshna-rayadurgam/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn profile"
             >
               <Linkedin size={18} />
+            </a>
+            <a
+              href="https://github.com/Jyoshna1912/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub profile"
+            >
+              <Github size={18} />
             </a>
           </div>
           <p>
@@ -226,16 +242,16 @@ function App() {
           </div>
           <div className="section-body" data-reveal>
             <p>
-              I'm a frontend developer who enjoys bringing ideas to life on the
-              web. What interests me most is how a website can tell a story —
-              helping a business show people who they are, what they offer, and
-              why it matters.
+              I'm a frontend developer focused on building clear, responsive
+              interfaces with React.js, JavaScript and TypeScript. I enjoy turning
+              product requirements into practical user experiences, from public
+              websites to the workflows behind business applications.
             </p>
             <p>
-              My experience spans responsive client websites, admin interfaces,
-              examination platforms, and an offline-first retail POS
-              application. I enjoy figuring out how each interface can make a
-              task clearer and easier for the person using it.
+              In my professional role, I've contributed to team-built products
+              including an offline-first retail POS/ERP and an examination
+              management platform. I also build selected website projects and
+              care about accessibility, maintainable UI and thoughtful details.
             </p>
             <p>
               Outside of coding, I love to travel. Discovering new places and
@@ -270,26 +286,34 @@ function App() {
                   Frontend Developer <span>· Youngminds</span>
                 </h3>
                 <p>
-                  Built React-based web and desktop interfaces, supported
-                  production rollouts and worked with REST APIs across business
-                  workflows.
+                  Contributed to React.js and TypeScript interfaces across a
+                  retail ERP, an examination platform, and business and
+                  educational websites as part of the development team.
                 </p>
                 <ul>
                   <li>
-                    Developed cashier workflows for Custom ERP, including
-                    billing, discounts, taxes, barcode scanning, order handling
-                    and offline/online sync states.
+                    Developed frontend cashier modules for PastryChef ERP,
+                    covering billing workflows, discount and tax calculations,
+                    barcode scanning, customer lookup, payment handling and order
+                    cancellation.
                   </li>
                   <li>
-                    Built administration modules for ETC Mentors, including
-                    registration, exam creation and scheduling, reporting and
-                    results.
+                    Implemented UI behavior for stock-aware product selection and
+                    offline sales synchronization, including sync-status and
+                    error states.
                   </li>
                   <li>
-                    Developed responsive business, educational and corporate
-                    websites and admin panels.
+                    Contributed to ETC Mentors administration workflows for
+                    registration, exam scheduling, reporting and results, plus
+                    responsive websites and admin interfaces.
                   </li>
                 </ul>
+                <p className="experience-context">
+                  The PastryChef ERP was used across 3 outlets and handled
+                  approximately 100–200 transactions per day. These figures
+                  describe the wider product, not an individually attributable
+                  result.
+                </p>
                 <div className="skill-tags">
                   <span>React</span>
                   <span>Javascript</span>
@@ -326,10 +350,11 @@ function App() {
           </div>
           <div className="section-body">
             <p className="section-intro">
-              A selection of websites and application interfaces I've worked on.
-              Some client projects aren't publicly hosted, so those are shown
-              with supplied screenshots or clearly labelled illustrative
-              previews.
+              Four featured projects appear first, followed by additional client
+              and team projects. Each description explains my contribution; team
+              products are not presented as work I built alone. Private projects
+              use illustrative previews rather than screenshots of the actual
+              product.
             </p>
             <div className="filter-list" aria-label="Filter projects">
               {categories.map((category) => (
@@ -356,6 +381,9 @@ function App() {
                 >
                   <div className="project-thumb">
                     <ProjectVisual project={project} />
+                    {project.featured && (
+                      <span className="featured-label">FEATURED</span>
+                    )}
                     {project.links?.length ? (
                       <a
                         href={project.links[0].href}
@@ -378,32 +406,68 @@ function App() {
                       <h3>{project.title}</h3>
                     </div>
                     <p>{project.description}</p>
+                    <p className="project-contribution">
+                      <strong>{project.teamProject ? "Team contribution:" : "My contribution:"}</strong> {project.contribution}
+                    </p>
                     <div className="project-tags">
                       {project.tags.map((tag) => (
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
-                    {project.links?.length ? (
-                      <a
-                        className="project-link"
-                        href={project.links[0].href}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Visit website <ExternalLink size={13} />
-                      </a>
-                    ) : (
-                      <span className="project-private">
-                        Private client work · Preview unavailable
-                      </span>
+                    <div className="project-actions">
+                      {project.links?.length ? (
+                        <a
+                          className="project-link"
+                          href={project.links[0].href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {project.title === "Fairy of Nail & Lash" ? "Live website" : "Visit website"} <ExternalLink size={13} />
+                        </a>
+                      ) : (
+                        <span className="project-private">
+                          {project.teamProject
+                            ? "Team project · My frontend contribution"
+                            : "Client project · Preview only"}
+                        </span>
+                      )}
+                      {project.caseStudy && (
+                        <button
+                          className="case-study-toggle"
+                          type="button"
+                          aria-expanded={expandedProjects.includes(project.title)}
+                          onClick={() => setExpandedProjects((current) =>
+                            current.includes(project.title)
+                              ? current.filter((title) => title !== project.title)
+                              : [...current, project.title]
+                          )}
+                        >
+                          {expandedProjects.includes(project.title) ? "Hide case study" : "View case study"}
+                          <ChevronDown size={13} className={expandedProjects.includes(project.title) ? "chevron-open" : ""} />
+                        </button>
+                      )}
+                    </div>
+                    {project.caseStudy && expandedProjects.includes(project.title) && (
+                      <div className="case-study-panel">
+                        <p className="case-study-heading">My contribution</p>
+                        <p>{project.caseStudy.context}</p>
+                        <ul>
+                          {project.caseStudy.highlights.map((highlight) => (
+                            <li key={highlight}>{highlight}</li>
+                          ))}
+                        </ul>
+                        <p className="case-study-disclaimer">Team-built product · Details here describe my frontend contribution, not sole ownership of the full application.</p>
+                      </div>
                     )}
                   </div>
                 </article>
               ))}
             </div>
             <p className="gallery-footnote">
-              Illustrative previews for Custom ERP and admin interfaces are
-              visual stand-ins, not screenshots of the actual products.
+              Project ownership is described individually. PastryChef ERP and
+              ETC Mentors were team projects; their previews are illustrative
+              stand-ins, not screenshots of the actual products. Private client
+              details are intentionally omitted.
             </p>
           </div>
         </section>
@@ -429,14 +493,24 @@ function App() {
             >
               rayadurgamjyoshnaroyal@gmail.com <ArrowUpRight size={16} />
             </a>
-            <a
-              className="linkedin-cta"
-              href="https://www.linkedin.com/in/jyoshna-rayadurgam"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Linkedin size={16} /> Connect on LinkedIn
-            </a>
+            <div className="contact-links">
+              <a
+                className="linkedin-cta"
+                href="https://www.linkedin.com/in/jyoshna-rayadurgam/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Linkedin size={16} /> Connect on LinkedIn
+              </a>
+              <a
+                className="linkedin-cta"
+                href="https://github.com/Jyoshna1912/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Github size={16} /> View GitHub
+              </a>
+            </div>
           </div>
         </section>
         <footer className="site-footer">
