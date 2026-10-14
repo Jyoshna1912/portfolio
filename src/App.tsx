@@ -259,7 +259,7 @@ function App() {
               for the stories and experiences we build online.
             </p>
             <p className="about-emphasis">
-              I like making the experience clear, useful, and considered.
+              Count me in if it's about shaping pixels into unforgettable experiences.
             </p>
             <div className="skills-line">
               <span>React.js</span>
