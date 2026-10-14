@@ -242,16 +242,10 @@ function App() {
           </div>
           <div className="section-body" data-reveal>
             <p>
-              I'm a frontend developer focused on building clear, responsive
-              interfaces with React.js, JavaScript and TypeScript. I enjoy turning
-              product requirements into practical user experiences, from public
-              websites to the workflows behind business applications.
+             I'm a Frontend Developer specializing in building responsive websites, web applications, admin panels, and landing pages using React.js, JavaScript, and TypeScript. I enjoy turning ideas and product requirements into intuitive user interfaces, whether it's a public-facing website, a product or service promotion page, or a feature-rich business application.
             </p>
             <p>
-              In my professional role, I've contributed to team-built products
-              including an offline-first retail POS/ERP and an examination
-              management platform. I also build selected website projects and
-              care about accessibility, maintainable UI and thoughtful details.
+             In my professional role, I've contributed to a variety of web projects, including educational and corporate websites, administrative dashboards, and team-built platforms such as an offline-first retail POS/ERP and an examination management system. I care about creating accessible, maintainable interfaces with thoughtful details that make digital experiences both useful and engaging.
             </p>
             <p>
               Outside of coding, I love to travel. Discovering new places and
