@@ -141,7 +141,9 @@ function App() {
             return project.visual === "pos" || project.visual === "dashboard";
           return true;
         })
-        .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))),
+        .sort(
+          (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+        ),
     [activeCategory],
   );
   const closeMenu = () => setMenuOpen(false);
@@ -158,12 +160,18 @@ function App() {
           </h1>
           <h2>Frontend Developer building real-world React applications.</h2>
           <p className="intro-summary">
-            I build responsive web interfaces and business workflows with React.js
-            and TypeScript, and contribute to desktop applications with Electron.js.
+            I build responsive web experiences using React.js, JavaScript,
+            TypeScript, HTML, CSS, and Tailwind CSS—from engaging landing pages
+            to feature-rich applications. I also contribute to desktop
+            applications built with Electron.js.
           </p>
           <div className="hero-actions">
-            <a className="hero-primary" href="#work">Explore my work <ArrowUpRight size={15} /></a>
-            <a className="hero-secondary" href="#contact">Contact me</a>
+            <a className="hero-primary" href="#work">
+              Explore my work <ArrowUpRight size={15} />
+            </a>
+            <a className="hero-secondary" href="#contact">
+              Contact me
+            </a>
           </div>
         </div>
         <button
@@ -242,18 +250,31 @@ function App() {
           </div>
           <div className="section-body" data-reveal>
             <p>
-             I'm a Frontend Developer specializing in building responsive websites, web applications, admin panels, and landing pages using React.js, JavaScript, and TypeScript. I enjoy turning ideas and product requirements into intuitive user interfaces, whether it's a public-facing website, a product or service promotion page, or a feature-rich business application.
+              I'm a Frontend Developer specializing in building responsive
+              websites, web applications, admin panels, and landing pages using
+              React.js, JavaScript, and TypeScript. I enjoy turning ideas and
+              product requirements into intuitive user interfaces, whether it's
+              a public-facing website, a product or service promotion page, or a
+              feature-rich business application.
             </p>
             <p>
-             In my professional role, I've contributed to a variety of web projects, including educational and corporate websites, administrative dashboards, and team-built platforms such as an offline-first retail POS/ERP and an examination management system. I care about creating accessible, maintainable interfaces with thoughtful details that make digital experiences both useful and engaging.
+              My professional experience spans educational and corporate
+              websites, administrative dashboards, product and service promotion
+              pages, and web applications. I've also contributed to team-built
+              products, including an offline-first retail POS/ERP and an
+              examination management platform, working alongside developers to
+              build practical, user-focused features. I care about creating
+              accessible, maintainable interfaces with thoughtful details that
+              make digital experiences both useful and engaging
             </p>
             <p>
-              Outside of coding, I love to travel. Discovering new places and
-              seeing how people experience the world gives me fresh inspiration
-              for the stories and experiences we build online.
+              Outside of coding, I love travelling, exploring new places, and
+              taking a break from the usual routine. It's my way of finding
+              fresh perspectives and coming back with a little more inspiration.
             </p>
             <p className="about-emphasis">
-              Count me in if it's about shaping pixels into unforgettable experiences.
+              Count me in if it's about shaping pixels into unforgettable
+              experiences.
             </p>
             <div className="skills-line">
               <span>React.js</span>
@@ -288,12 +309,12 @@ function App() {
                   <li>
                     Developed frontend cashier modules for PastryChef ERP,
                     covering billing workflows, discount and tax calculations,
-                    barcode scanning, customer lookup, payment handling and order
-                    cancellation.
+                    barcode scanning, customer lookup, payment handling and
+                    order cancellation.
                   </li>
                   <li>
-                    Implemented UI behavior for stock-aware product selection and
-                    offline sales synchronization, including sync-status and
+                    Implemented UI behavior for stock-aware product selection
+                    and offline sales synchronization, including sync-status and
                     error states.
                   </li>
                   <li>
@@ -401,7 +422,12 @@ function App() {
                     </div>
                     <p>{project.description}</p>
                     <p className="project-contribution">
-                      <strong>{project.teamProject ? "Team contribution:" : "My contribution:"}</strong> {project.contribution}
+                      <strong>
+                        {project.teamProject
+                          ? "Team contribution:"
+                          : "My contribution:"}
+                      </strong>{" "}
+                      {project.contribution}
                     </p>
                     <div className="project-tags">
                       {project.tags.map((tag) => (
@@ -416,7 +442,10 @@ function App() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {project.title === "Fairy of Nail & Lash" ? "Live website" : "Visit website"} <ExternalLink size={13} />
+                          {project.title === "Fairy of Nail & Lash"
+                            ? "Live website"
+                            : "Visit website"}{" "}
+                          <ExternalLink size={13} />
                         </a>
                       ) : (
                         <span className="project-private">
@@ -429,30 +458,50 @@ function App() {
                         <button
                           className="case-study-toggle"
                           type="button"
-                          aria-expanded={expandedProjects.includes(project.title)}
-                          onClick={() => setExpandedProjects((current) =>
-                            current.includes(project.title)
-                              ? current.filter((title) => title !== project.title)
-                              : [...current, project.title]
+                          aria-expanded={expandedProjects.includes(
+                            project.title,
                           )}
+                          onClick={() =>
+                            setExpandedProjects((current) =>
+                              current.includes(project.title)
+                                ? current.filter(
+                                    (title) => title !== project.title,
+                                  )
+                                : [...current, project.title],
+                            )
+                          }
                         >
-                          {expandedProjects.includes(project.title) ? "Hide case study" : "View case study"}
-                          <ChevronDown size={13} className={expandedProjects.includes(project.title) ? "chevron-open" : ""} />
+                          {expandedProjects.includes(project.title)
+                            ? "Hide case study"
+                            : "View case study"}
+                          <ChevronDown
+                            size={13}
+                            className={
+                              expandedProjects.includes(project.title)
+                                ? "chevron-open"
+                                : ""
+                            }
+                          />
                         </button>
                       )}
                     </div>
-                    {project.caseStudy && expandedProjects.includes(project.title) && (
-                      <div className="case-study-panel">
-                        <p className="case-study-heading">My contribution</p>
-                        <p>{project.caseStudy.context}</p>
-                        <ul>
-                          {project.caseStudy.highlights.map((highlight) => (
-                            <li key={highlight}>{highlight}</li>
-                          ))}
-                        </ul>
-                        <p className="case-study-disclaimer">Team-built product · Details here describe my frontend contribution, not sole ownership of the full application.</p>
-                      </div>
-                    )}
+                    {project.caseStudy &&
+                      expandedProjects.includes(project.title) && (
+                        <div className="case-study-panel">
+                          <p className="case-study-heading">My contribution</p>
+                          <p>{project.caseStudy.context}</p>
+                          <ul>
+                            {project.caseStudy.highlights.map((highlight) => (
+                              <li key={highlight}>{highlight}</li>
+                            ))}
+                          </ul>
+                          <p className="case-study-disclaimer">
+                            Team-built product · Details here describe my
+                            frontend contribution, not sole ownership of the
+                            full application.
+                          </p>
+                        </div>
+                      )}
                   </div>
                 </article>
               ))}
