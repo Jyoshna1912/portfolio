@@ -1,6 +1,6 @@
-# Jyoshna Rayadurgam — Frontend Developer Portfolio
+# Jyoshna Rayadurgam — Software Developer Portfolio
 
-A responsive portfolio built with React, TypeScript, and Vite. It highlights selected website projects, professional frontend experience, and scoped case studies for team-built applications.
+A responsive portfolio built with React, TypeScript, and Vite. It highlights software development experience with a strong frontend focus, selected web projects, API-connected application workflows, and scoped case studies for team-built applications.
 
 ## Run locally
 

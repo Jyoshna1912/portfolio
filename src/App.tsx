@@ -10,6 +10,8 @@ import {
   Linkedin,
   Github,
   ChevronDown,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { projects, type Project } from "./data/projects";
 import resumePdf from "./assets/Jyoshna-Rayadurgam-Resume.pdf";
@@ -72,6 +74,15 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [expandedProjects, setExpandedProjects] = useState<string[]>([]);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    const saved = window.localStorage.getItem("jyoshna-portfolio-theme");
+    return saved === "light" ? "light" : "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    window.localStorage.setItem("jyoshna-portfolio-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const ids = ["about", "experience", "work", "contact"];
@@ -152,18 +163,33 @@ function App() {
     <div className="portfolio-shell">
       <aside className="intro-panel">
         <div className="intro-copy" id="top">
-          <p className="eyebrow">FRONTEND DEVELOPER</p>
+          <div className="hero-topline">
+            <p className="eyebrow">SOFTWARE DEVELOPER</p>
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={() =>
+                setTheme((current) => (current === "dark" ? "light" : "dark"))
+              }
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              <span>{theme === "dark" ? "LIGHT MODE" : "DARK MODE"}</span>
+            </button>
+          </div>
           <h1>
             Jyoshna
             <br />
             Rayadurgam<span>.</span>
           </h1>
-          <h2>Frontend Developer building real-world React applications.</h2>
+          <h2>Software Developer building thoughtful digital experiences.</h2>
           <p className="intro-summary">
-            I build responsive web experiences using React.js, JavaScript,
-            TypeScript, HTML, CSS, and Tailwind CSS—from engaging landing pages
-            to feature-rich applications. I also contribute to desktop
-            applications built with Electron.js.
+            I build responsive web applications and practical product
+            experiences with React.js, JavaScript and TypeScript. My work spans
+            polished interfaces, business workflows, REST API integration and
+            Electron-based desktop applications, with experience connecting web
+            interfaces to Node.js, Express.js and MySQL services.
           </p>
           <div className="hero-actions">
             <a className="hero-primary" href="#work">
@@ -206,7 +232,7 @@ function App() {
           <a
             className="resume-link"
             href={resumePdf}
-            download="Jyoshna_Rayadurgam_Frontend_Resume.pdf"
+            download="Jyoshna_Rayadurgam_Resume.pdf"
           >
             DOWNLOAD RESUME <ArrowUpRight size={15} />
           </a>
@@ -242,7 +268,7 @@ function App() {
 
       <main className="content-column">
         <section className="content-section about-section" id="about">
-          <p className="mobile-eyebrow">FRONTEND DEVELOPER · TIRUPATI, INDIA</p>
+          <p className="mobile-eyebrow">SOFTWARE DEVELOPER · TIRUPATI, INDIA</p>
           <div className="section-label">
             <span>01</span>
             <span>ABOUT</span>
@@ -250,22 +276,25 @@ function App() {
           </div>
           <div className="section-body" data-reveal>
             <p>
-              I'm a Frontend Developer specializing in building responsive
-              websites, web applications, admin panels, and landing pages using
-              React.js, JavaScript, and TypeScript. I enjoy turning ideas and
-              product requirements into intuitive user interfaces, whether it's
-              a public-facing website, a product or service promotion page, or a
-              feature-rich business application.
+              I'm a Software Developer who enjoys building thoughtful,
+              user-friendly digital experiences. I build responsive websites,
+              web applications, admin panels and business interfaces using
+              React.js, JavaScript and TypeScript. I enjoy translating product
+              requirements into clear, intuitive experiences—from public-facing
+              websites to feature-rich applications used in day-to-day business
+              operations.
             </p>
             <p>
-              My professional experience spans educational and corporate
-              websites, administrative dashboards, product and service promotion
-              pages, and web applications. I've also contributed to team-built
-              products, including an offline-first retail POS/ERP and an
-              examination management platform, working alongside developers to
-              build practical, user-focused features. I care about creating
-              accessible, maintainable interfaces with thoughtful details that
-              make digital experiences both useful and engaging
+              My professional experience includes educational and corporate
+              websites, administrative dashboards, product and service websites,
+              and business applications. I've contributed to team-built products
+              such as an offline-first retail POS/ERP and an examination
+              management platform, developing user-facing workflows and
+              integrating REST APIs. I have also worked with Node.js, Express.js
+              and MySQL to connect application interfaces with booking and
+              data-management workflows. I care about maintainable code,
+              reliable interactions and the details that make software useful in
+              real-world settings.
             </p>
             <p>
               Outside of coding, I love travelling, exploring new places, and
@@ -273,8 +302,8 @@ function App() {
               fresh perspectives and coming back with a little more inspiration.
             </p>
             <p className="about-emphasis">
-              Count me in if it's about shaping pixels into unforgettable
-              experiences.
+              I enjoy building software that feels clear, responsive and
+              dependable—from the first interaction to the completed workflow.
             </p>
             <div className="skills-line">
               <span>React.js</span>
@@ -282,13 +311,16 @@ function App() {
               <span>JavaScript</span>
               <span>Tailwind CSS</span>
               <span>REST APIs</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>MySQL</span>
               <span>Electron.js</span>
             </div>
           </div>
         </section>
 
         <section className="content-section" id="experience">
-          <div className="section-label">
+          <div className="section-label" style={{ marginTop: "15px" }}>
             <span>02</span>
             <span>EXPERIENCE</span>
             <i />
@@ -298,12 +330,13 @@ function App() {
               <div className="experience-date">DEC 2024 — JUL 2026</div>
               <div className="experience-detail">
                 <h3>
-                  Frontend Developer <span>· Youngminds</span>
+                  Software Developer <span>· Youngminds</span>
                 </h3>
                 <p>
-                  Contributed to React.js and TypeScript interfaces across a
-                  retail ERP, an examination platform, and business and
-                  educational websites as part of the development team.
+                  Developed and maintained React.js and TypeScript features
+                  across a retail ERP, an examination platform, and business and
+                  educational websites, with a focus on frontend workflows and
+                  API-connected application experiences.
                 </p>
                 <ul>
                   <li>
@@ -365,11 +398,8 @@ function App() {
           </div>
           <div className="section-body">
             <p className="section-intro">
-              Four featured projects appear first, followed by additional client
-              and team projects. Each description explains my contribution; team
-              products are not presented as work I built alone. Private projects
-              use illustrative previews rather than screenshots of the actual
-              product.
+              Here are few featured projects, followed by additional client and
+              team projects along with my contribution;
             </p>
             <div className="filter-list" aria-label="Filter projects">
               {categories.map((category) => (
@@ -420,8 +450,11 @@ function App() {
                       <p className="project-category">{project.category}</p>
                       <h3>{project.title}</h3>
                     </div>
-                    <p>{project.description}</p>
-                    <p className="project-contribution">
+                    <p style={{ fontSize: "14px" }}>{project.description}</p>
+                    <p
+                      className="project-contribution"
+                      style={{ fontSize: "13px" }}
+                    >
                       <strong>
                         {project.teamProject
                           ? "Team contribution:"
@@ -437,18 +470,20 @@ function App() {
                     <div className="project-actions">
                       {project.links?.length ? (
                         <a
-                          className="project-link"
+                          className="project-link subtle-blink"
+                          style={{ fontSize: "11px" }}
                           href={project.links[0].href}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {project.title === "Fairy of Nail & Lash"
-                            ? "Live website"
-                            : "Visit website"}{" "}
+                          Visit website
                           <ExternalLink size={13} />
                         </a>
                       ) : (
-                        <span className="project-private">
+                        <span
+                          className="project-private"
+                          style={{ fontSize: "11px" }}
+                        >
                           {project.teamProject
                             ? "Team project · My frontend contribution"
                             : "Client project · Preview only"}
@@ -492,13 +527,13 @@ function App() {
                           <p>{project.caseStudy.context}</p>
                           <ul>
                             {project.caseStudy.highlights.map((highlight) => (
-                              <li key={highlight}>{highlight}</li>
+                              <li key={highlight}>- {highlight}</li>
                             ))}
                           </ul>
                           <p className="case-study-disclaimer">
-                            Team-built product · Details here describe my
-                            frontend contribution, not sole ownership of the
-                            full application.
+                            Team-built product · These are some of the important
+                            frontend contribution, i made for the full
+                            application.
                           </p>
                         </div>
                       )}
@@ -506,12 +541,6 @@ function App() {
                 </article>
               ))}
             </div>
-            <p className="gallery-footnote">
-              Project ownership is described individually. PastryChef ERP and
-              ETC Mentors were team projects; their previews are illustrative
-              stand-ins, not screenshots of the actual products. Private client
-              details are intentionally omitted.
-            </p>
           </div>
         </section>
 
@@ -527,8 +556,9 @@ function App() {
               Let's make something <em>useful.</em>
             </h2>
             <p>
-              I'm open to conversations about frontend opportunities,
-              interesting projects and thoughtful digital experiences.
+              I'm open to Software Developer and React-focused opportunities,
+              interesting product work and projects where thoughtful interfaces
+              make a practical difference.
             </p>
             <a
               className="email-cta"

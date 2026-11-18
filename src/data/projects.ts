@@ -174,12 +174,12 @@ export const projects: Project[] = [
     title: 'Himalaya Pool Resort',
     category: 'Hospitality website',
     description:
-      'A resort website presenting hospitality offerings, café information and event-related details through a structured, visually engaging layout.',
+      'A resort booking website that presents the property and its offerings while allowing visitors to send booking enquiries through an online form.',
     contribution:
-      'Independently developed the static frontend for the client website, including its page layouts and responsive presentation.',
+      'Developed the responsive React frontend and connected booking enquiry forms to Node.js and Express APIs, with MySQL used to store and manage submitted enquiry data.',
     image: himalayaEventsImage,
     imageAlt: 'Himalaya Pool Resort events page',
-    tags: ['Frontend Development', 'Responsive Layout', 'Client Project'],
+    tags: ['React', 'Tailwind CSS', 'Node.js', 'Express.js', 'MySQL', 'REST APIs'],
     visual: 'image',
     featured: true,
   },

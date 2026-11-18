@@ -1,15 +1,24 @@
 # Portfolio update summary
 
-- Clarified the hero message for React.js / TypeScript frontend roles and added direct work/contact actions.
-- Moved four featured projects to the top: Fairy of Nail & Lash, Himalaya Pool Resort, PastryChef ERP and ETC Mentors.
-- Added expandable case studies for PastryChef ERP and ETC Mentors.
-- Made project attribution explicit: team-built products are described as team projects and contributions are scoped to frontend work.
-- Added a contribution statement to every project card.
-- Removed the reused MTI image from the VEMU card so it no longer implies that the image belongs to VEMU.
-- Added GitHub links, updated LinkedIn URL, and replaced the embedded resume PDF with the latest resume.
-- Updated page description and canonical/social URL metadata.
-- Kept the existing visual theme and responsive layout.
+- Repositioned the portfolio as a Software Developer profile while keeping React.js and frontend engineering as the main strength.
+- Updated the hero, about section, experience description, contact copy, page title and social metadata to use consistent Software Developer positioning.
+- Added measured references to Node.js, Express.js, MySQL and API-connected workflows without presenting backend work as the primary specialization or overstating its scope.
+- Updated the Himalaya Pool Resort project to describe its responsive React frontend, booking enquiry API integration and MySQL-backed enquiry storage.
+- Added a light/dark theme toggle. Dark mode remains the default; the selected theme is saved in local browser storage.
+- Preserved existing project attribution, case studies, layout, navigation and responsive behavior.
 
-## Build
+## Run locally
 
-Run `npm install` and `npm run build`. The build output is generated in `dist/`.
+```bash
+npm install
+npm run dev
+```
+
+## Production build
+
+```bash
+npm run build
+npm run preview
+```
+
+The production build is generated in `dist/` and can be deployed to Vercel or another static hosting provider.
