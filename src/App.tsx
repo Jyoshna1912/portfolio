@@ -14,7 +14,7 @@ import {
   Moon,
 } from "lucide-react";
 import { projects, type Project } from "./data/projects";
-import resumePdf from "./assets/Jyoshna-Rayadurgam-Resume.pdf";
+import resumePdf from "./assets/jyoshna_software_engineer_resume.pdf";
 
 const categories = ["All", "Websites", "Applications"] as const;
 type Category = (typeof categories)[number];
@@ -232,7 +232,7 @@ function App() {
           <a
             className="resume-link"
             href={resumePdf}
-            download="Jyoshna_Rayadurgam_Resume.pdf"
+            download="jyoshna_software_engineer_resume.pdf"
           >
             DOWNLOAD RESUME <ArrowUpRight size={15} />
           </a>
