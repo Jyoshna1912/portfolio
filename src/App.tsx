@@ -76,7 +76,7 @@ function App() {
   const [expandedProjects, setExpandedProjects] = useState<string[]>([]);
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     const saved = window.localStorage.getItem("jyoshna-portfolio-theme");
-    return saved === "light" ? "light" : "dark";
+    return saved === "dark" ? "dark" : "light";
   });
 
   useEffect(() => {
